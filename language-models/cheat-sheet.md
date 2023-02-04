@@ -46,49 +46,119 @@
 
 
 ## Masked Language Modelling
-### BERT
-1810
-### RoBERTa
-1907
-### Albert
-1909
-### DistilBERT
-1910
-### ELECTRA
-2003
+### BERT [1810](https://arxiv.org/abs/1810.04805)
+1. **Architecture:** Encoder
+2. **Pretraining Objective:** Masked Language Modelling, Next-Sentence Prediction
+3. **Number of Parameters:** Base 110M, Large 340M
+4. **Dataset:** 3.3B Tokens from Toronto BookCorpus and Wikipedia 
+
+### RoBERTa [1907](https://arxiv.org/abs/1907.11692)
+1. **Architecture:** Encoder
+2. **Pretraining Objective:** Masked Language Modelling
+3. **Number of Parameters:** 356M
+4. **Dataset:** 33B Tokens from Toronto BookCorpus, Wikipedia, CC News, OpenWebText, and Stories
+
+### ALBERT [1909](https://arxiv.org/abs/1909.11942)
+1. **Architecture:** Encoder
+2. **Pretraining Objective:** Masked Language Modelling, Next-Sentence Prediction
+3. **Number of Parameters:** Base 110M, Large 340M
+4. **Dataset:** 3.3B Tokens from Toronto BookCorpus and Wikipedia 
+5. **Contribution:** Compressed version of BERT by using parameter sharing in each embedding layer to more efficient training.
+
+### DistilBERT [1910](https://arxiv.org/abs/1910.01108)
+1. **Architecture:** Encoder
+2. **Pretraining Objective:** Masked Language Modelling, Next-Sentence Prediction
+3. **Number of Parameters:** 66M
+4. **Dataset:** 3.3B Tokens from Toronto BookCorpus and Wikipedia 
+5. **Contribution:** Compressed version of BERT using distillation.
+
+### ELECTRA [2003](https://arxiv.org/abs/2003.10555)
+1. **Architecture:** Encoder
+2. **Pretraining Objective:** Masked Language Modelling, Next-Sentence Prediction
+3. **Number of Parameters:** Base 110M, Large 340M
+4. **Dataset:** 3.3B Tokens from Toronto BookCorpus and Wikipedia 
+5. **Dataset:** Trains two transformer models: the generator and the discriminator. Generator replaces tokens in a sequence, and trained as a masked language model. The discriminator tries to identify which tokens were replaced by the generator in the sequence.
 
 
 ## Casual Language Modeling
-### GPT
-1806
-### Transformer XL
-1901
-### GPT-2
-1902
-### XLNet
-1905
-### CTRL
-1909
-### GPT-3
-2005
-### GPT-Neo
-2103
-### Jurrasic-1
-2109
-### GLAM
-2112
-### Gopher
-2112
-### LAMBDA
-2201
-### Chinchilla
-2203
-### PalM
-2204
-### OPT
-2205
-### GPT-3.5
-2210
+### GPT [1806](https://s3-us-west-2.amazonaws.com/openai-assets/research-covers/language-unsupervised/language_understanding_paper.pdf)
+1. **Architecture:** Decoder
+2. **Pretraining Objective:** Next-token prediction
+3. **Number of Parameters:** 117M
+4. **Dataset:** BookCorpus
+
+### Transformer XL [1901](https://arxiv.org/abs/1901.02860)
+1. **Architecture:** Decoder
+2. **Pretraining Objective:** Next-token prediction
+3. **Number of Parameters:** 151M
+4. **Dataset:** Wikitext-103
+5. **Contribution:** Uses Relative Positional Embeddings which enable longer-context attention.
+
+### GPT-2 [1902](https://d4mucfpksywv.cloudfront.net/better-language-models/language_models_are_unsupervised_multitask_learners.pdf)
+1. **Architecture:** Decoder
+2. **Pretraining Objective:** Next-token prediction
+3. **Number of Parameters:** 1.5B
+4. **Dataset:** WebText
+
+### XLNet [1905](https://arxiv.org/abs/1906.08237)
+1. **Architecture:** Decoder
+2. **Pretraining Objective:** Next-token prediction
+3. **Number of Parameters:** 360M
+4. **Dataset:** Toronto Book Corpus, Wikipedia (3.3B Tokens), Giga5 (16GB text), ClueWeb 2012-B (19GB), and Common Crawl (110 GB).
+
+
+### GPT-3 [2005](https://arxiv.org/abs/2005.14165)
+1. **Architecture:** Decoder
+2. **Pretraining Objective:** Next-token prediction
+3. **Number of Parameters:** 175B
+4. **Dataset:** CommonCrawl (410B), WebText2 (19B), Books1 (12B), Books2 (55B), and Wikipedia (3B)
+
+### GLAM [2112](https://arxiv.org/abs/2112.06905)
+1. **Architecture:** Decoder
+2. **Pretraining Objective:** Next-token prediction
+3. **Number of Parameters:** 1.2T across 64 experts
+4. **Dataset:** 1.6T tokens including web pages filtered by Wikipedia and books for quality
+
+### Gopher [2112](https://arxiv.org/abs/2112.11446)
+1. **Architecture:** Decoder
+2. **Pretraining Objective:** Next-token prediction
+3. **Number of Parameters:** 1.2T across 64 experts
+4. **Dataset:** 1.6T tokens including web pages filtered by Wikipedia and books for quality
+5. **Contribution:** GPT-2 based. Uses RSNorm and Absoulte Positional Encoding rather than LayerNorm and Relative Positional Encoding.
+
+### LAMBDA [2201](https://arxiv.org/abs/2201.08239)
+1. **Architecture:** Decoder
+2. **Pretraining Objective:** Next-token prediction
+3. **Number of Parameters:** 137B
+4. **Dataset:** 1.56T tokens from public dialog data and web documents
+
+
+### Chinchilla [2203](https://arxiv.org/abs/2203.15556)
+1. **Architecture:** Decoder
+2. **Pretraining Objective:** Next-token prediction
+3. **Number of Parameters:** 70B
+4. **Dataset:** Massive Text
+
+### PalM [2204](https://arxiv.org/abs/2204.02311)
+1. **Architecture:** Decoder
+2. **Pretraining Objective:** Next-token prediction
+3. **Number of Parameters:** 540B
+4. **Dataset:** 780B tokens from webpages, books, Wikipedia, news articles, source code, social media conversations, and 24 programming languages.
+5. **Contribution:** SwiGLU activations, parallel layers, multi-query attention, RoPE embeddings, Shared Input-Output Embeddings, and without biases.
+
+### OPT [2205](https://arxiv.org/abs/2205.01068)
+1. **Architecture:** Decoder
+2. **Pretraining Objective:** Next-token prediction
+3. **Number of Parameters:** 540B
+4. **Dataset:** 180B tokens from RoBERTa, the Pile, and PushShift.io Reddit.
+5. **Contribution:** GPT-3 with training improvements introduced in Megatron-LM.
+
+### GPT-3.5 [2210](https://openai.com/blog/chatgpt/)
+1. **Architecture:** Decoder
+2. **Pretraining Objective:** Next-token prediction
+3. **Number of Parameters:** 175B
+4. **Dataset:** CommonCrawl (410B), WebText2 (19B), Books1 (12B), Books2 (55B), and Wikipedia (3B).
+5. **Contribution:** Built up on a number of models like Davinci-003 which are basically versions of the InstructGPT. 
 
 ## Encoder and Decoder-based Models
 ### T5
