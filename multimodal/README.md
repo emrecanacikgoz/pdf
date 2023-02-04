@@ -12,7 +12,7 @@ VL-BERT takes both visual and linguistic embedded features as input. Each input 
 3. Segment Embedding:  A learned segment embedding is added to every input element for indicating which segment it belongs to. There are three types of segments in VL-BERT: A, B, C. They are defined to separate input elements from different sources. A and B are defined for the words from the first and second input sentence, and C for the RoIs from the input image. For QA the format is <Question, Answer, Image> where A denotes Question, B denotes Answer, and C denotes Image. For Image-Caption task, the input format is <Caption, Image> where A denotes Caption, and C denotes Image.
 4. Sequence Position Embedding: Same in BERT. Each input element indicated its order in the input sequence and the learnable sequence position embedding is added to every input element indicating its order in the input sequence. The sequence position embedding for all visual elements are the same since there is no natural order among input visual elements.
 ```
-![alt text](https://github.com/emrecanacikgoz/pdf/blob/main/multimodal/figs/vlbert.png)
+![alt text](https://github.com/emrecanacikgoz/papers/blob/main/multimodal/figs/vlbert.png)
 
 
 
@@ -21,7 +21,7 @@ VL-BERT takes both visual and linguistic embedded features as input. Each input 
 
 VisualBERT is a pre-trained model build on stack of Transformer layers image and text inputs are jointly processed with self-attention. It consist of seperate embeddings as language (text) embeddings and visual (image) embeddings. Language embeddings follows the Bert's embedding structure which is the sum of: token embeddings, segment embeddings, and position embeddings. In addition to Bert, they introduced visual embeddings by summing: a visual feature representation of the bounding region, a segment embedding indicating it is an image embedding, a position embedding which is used when alignments between words and bounding regions are provided as part of the input, and set to the sum of the position embeddings corresponding to the aligned words (what?). Object proposals are extracted by using Faster-RCNN. VisualBert is trained on COCO image caption dataset that contains 5 captions per image. which It is pre-trained on two visually grounded tasks: masked language modeling and sentence image alignments. In MLM, part of the text is masked randomly and model tries to predict the masked words by using remaining words and the visual context coming from the corresponding image. In sentence-image prediction objective, the model is trained to decide wheter the given text matches the image or not. VisualBERT is evaluated on four different datasets: VQA v2.0 (question answering), VCR (visual reasoning), NLVR (visual reasoning), and Flickr30k (region-to-phrase grounding.)
 
-![alt text](https://github.com/emrecanacikgoz/pdf/blob/main/multimodal/figs/visualbert.png)
+![alt text](https://github.com/emrecanacikgoz/papers/blob/main/multimodal/figs/visualbert.png)
 
 
 
@@ -30,16 +30,16 @@ VisualBERT is a pre-trained model build on stack of Transformer layers image and
 
 Lxmert built on two single-modal network architectures that is used for source sentences and images respectively and a follow-up cross-modal Encoder combines these two modality. Lxmert consist of three encoders: object relationship encoder, language encoder, and cross-modality encoder. It is pre-trained on 5 different tasks: masked language modeling, masked object prediction via RoI-feature regressin, masked objectd predicition via detected-label classification, cross-modallity matching, and image question answering. On the other hand, is tis pre-trained on MS COCO(captioning), Visual Genome (captioning), VQA v2.0 (question answering), GQA (question answering), and VG-QA (question answering) datasets. They pre-train all the encoders and embedding layers from scratch, they didn't use any LLM embeddings for initialization. They used WordPiece tokenizer as in Bert for language side before giving them to the language encoder and they used 101-layer Faster R-CNN (pre-trained on Visual Genome) as feature extractor for image side before feeding them to object-relationship encoder. They accepted these detected labels output as ground truths. The outputs of the object-relationship encoder and language encoder are given to cross-modality encoder to align the features between these two modality to learn the joint representations. At the end, model produces three outputs as vision output (RoI Feature Regression + Detected-Label Classification), cross-modality output (Cross-Modality Matching + Q/A), and language output (Masked Cross-Modality LM). Pros: pre-trained on a massive visual question answering data. Cons: Single-stream architecture that contaions two single modal Transformer for vision and language, followed by one cross-modal Transformer for joint representation.
 
-![alt text](https://github.com/emrecanacikgoz/pdf/blob/main/multimodal/figs/lxmert.png)
+![alt text](https://github.com/emrecanacikgoz/papers/blob/main/multimodal/figs/lxmert.png)
 
 
 
 ## ViLBert
 VilBert is a two-stream multimodal model that contains seperate networks to process image and text inputs. It fuses two different modality by using attention-based interactions, i.e. transformer layers. It is pre-trained on two tasks: Masked Multi-modal Modelling and Multi-modal Alignment Prediction. In Masked Multi-modal Modelling, %15 of the words and image regions in the input are masked tandomly. Model tries to reconstruct the masked feature from remaining words and regions. On the other hand, in Multi-modal Alignment Prediction, model tries to predict the correspondance of an image and text segment, i.e. whether the image content is described by the caption or not. They initilized the text-side of the VilBert model with BERT-based embeddings. The region features for image side is exctracted by using Faster R-CNN model that is pretrain on VG dataset. Then, pre-training is done on Conceptual Captions dataset by following these two proxy tasks. VilBert is evaluated on five different downstream task: Vusial Question Answering (on VQA 2.0 dataset), Visual Commensense Reasoning (on VCR dataset), Grounding Referring Expressions (RefCOCO+ dataset), Caption-Based Image Retrieval (Flickr30k dataset), ‘Zero-shot’ Caption-Based Image Retrieval (Flicker30k without fine-tunning). ViLBERT and LXMERT introduced the two-stream architecture, where two Transformers are applied to images and text independently, which is fused by a third Transformer in a later stage. 
 
-![alt text](https://github.com/emrecanacikgoz/pdf/blob/main/multimodal/figs/vilbert-model-1.png)
-![alt text](https://github.com/emrecanacikgoz/pdf/blob/main/multimodal/figs/vilbert-model-2.png)
-![alt text](https://github.com/emrecanacikgoz/pdf/blob/main/multimodal/figs/vilbert-model-3.png)
+![alt text](https://github.com/emrecanacikgoz/papers/blob/main/multimodal/figs/vilbert-model-1.png)
+![alt text](https://github.com/emrecanacikgoz/papers/blob/main/multimodal/figs/vilbert-model-2.png)
+![alt text](https://github.com/emrecanacikgoz/papers/blob/main/multimodal/figs/vilbert-model-3.png)
 
 
 
@@ -53,7 +53,44 @@ Uniter is a single model image-text representation model where the multimodal in
 3. Compared with previous work on multimodal pre-training: (i) our masked language/region modeling is conditioned on full observation of image/text, rather than applying joint random masking to both modalities; (ii) they introduce a novel WRA pre-training task via the use of Optimal Transport (OT) to explicitly encourage fine-grained alignment between words and image regions. 
 ```
 
-![alt text](https://github.com/emrecanacikgoz/pdf/blob/main/multimodal/figs/uniter.png)
+![alt text](https://github.com/emrecanacikgoz/papers/blob/main/multimodal/figs/uniter.png)
+
+## BLIP
+[2201:salesforces:BLIP:Bootstrapping Language-Image Pre-training for Unified Vision-Language Understanding and Generation.pdf](https://arxiv.org/abs/2201.12086)
+
+Pre-training Dataset: 
+1. COCO 
+2. Visual Genome (VG)
+3. Conceptual Captions (CC3M)
+4. Conceptual Captions 12M (CC12M)
+5. SBU
+6. LAION
+
+Downstream Evaluations:
+1. Image-Text Retrieval: They evaluated BLIP both for image-to-text and text-to-image retrieval tasks on COCO and Flickr30K. They used ITC and ITM losses during fine-tuning.
+2. Image Captioning: They have used two datatsets during fine-tuning: COCO and No-Caps with LM loss. They also add "a picture of" prompt at the begining of each caption.
+3. Visual Question Answering (VQA): 
+4. Natural Language Visual Reasoning (NLVR2)
+5. Visual Dialog (VisDial)
+
+Model
+1. Image Encoder:
+2. Text Encoder:
+3. Image Grounded Text Encoder:
+4. Image Grounded Text Decoder:
+
+Pre-training Objectives (Loss)
+1. Image-Text Contrastive Loss
+2. Image-Text Matching
+3. Image-conditioned LM
+
+Dataset
+1. CapFlit
+    1. Captioner:
+    2. Filter:
+
+
+Downstream
 
 ## Unicoder-VL
 To-Do
