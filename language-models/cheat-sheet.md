@@ -1,49 +1,11 @@
 # Transformers Catalog
 
-## RLHF
-<To-do>
-
 ## Pre-training Tasks
 1. **Language Modeling (LM):** Predict the next token (unidirectional models), or,  previous and next token (bidirectional models).
 2. **Masked Language Modeling (MLM):** Randomly mask out some tokens from the input sentences and then train the model to predict the masked tokens by using the rest of the tokens.
 3. **Permuted Language Modeling (PLM):** same as LM but on a random permutation of input sequences. A permutation is randomly sampled from all possible permutations. Then some of the tokens are chosen as the target, and the model is trained to predict these targets.
 4. **Denoising Autoencoder (DAE):** take a partially corrupted input (e.g. Randomly sampling tokens from the input and replacing them with [MASK] elements. randomly deleting tokens from the input, or shuffling sentences in random order) and aim to recover the original undistorted input.
 5. **Contrastive Learning (CTL):** <To-do>
-
-## Text to Image
-### DALL-E
-2101
-### GLIDE
-2112
-### Stable Diffusion
-2112
-### Flamingo
-2204
-### DALL-E 2
-2204
-
-## Image Classification
-### ViT
-2010
-### Swin Transformer
-2103
-### Global Context ViT
-2206
-
-## Image-Text Pair
-### CLIP
-2102
-### ALBEF
-2107
-### FLAVA
-2112
-### BLIP
-2201
-### Imagen
-2206
-### BLIP-2
-2301
-
 
 ## Masked Language Modelling
 ### BERT [1810](https://arxiv.org/abs/1810.04805)
@@ -56,7 +18,7 @@
 1. **Architecture:** Encoder
 2. **Pretraining Objective:** Masked Language Modelling
 3. **Number of Parameters:** 356M
-4. **Dataset:** 33B Tokens from Toronto BookCorpus, Wikipedia, CC News, OpenWebText, and Stories
+4. **Dataset:** 160GB and 33B Tokens from Toronto BookCorpus, Wikipedia, CC News, OpenWebText, and Stories
 
 ### ALBERT [1909](https://arxiv.org/abs/1909.11942)
 1. **Architecture:** Encoder
@@ -161,18 +123,33 @@
 5. **Contribution:** Built up on a number of models like Davinci-003 which are basically versions of the InstructGPT. 
 
 ## Encoder and Decoder-based Models
-### T5
-1910
-### BART
-1910
-### BigBird
-2007
-### Switch
-2101
-### HTML
-2107
-### DQ-BART
-2203
+### T5 [1910](https://arxiv.org/abs/1910.10683)
+1. **Architecture:** Encder+Decoder
+2. **Pretraining Objective:** Denoising Autoencoder
+3. **Number of Parameters:** 11B
+4. **Dataset:** 750 GB of data from Colossal Clean Crawled Corpus (C4) and the Common Crawl dataset.
+5. **Contribution:** Built on vanilla Transformer but uses Relative Positional Embeddings. 
+
+### BART [1910](https://arxiv.org/abs/1910.13461)
+1. **Architecture:** Encder+Decoder
+2. **Pretraining Objective:** Denoising Autoencoder
+3. **Number of Parameters:** 345M
+4. **Dataset:** 160 GB with 33B Tokens from Toronto BookCorpus, Wikipedia, CC News, OpenWebText, and Stories
+5. **Contribution:** Combination of BERT and GPT.
+
+### BigBird [2007](https://arxiv.org/abs/2007.14062)
+1. **Architecture:** Encder+Decoder
+2. **Pretraining Objective:** Masked Language Modelling
+3. **Number of Parameters:** 175B
+4. **Dataset:** Books, CC-News, Stories, and Wikipedia.
+5. **Contribution:** Uses Sparse Attention Mechanism which overcome the issue of quadratic dependency and leads training with longer sequences.
+
+### DQ-BART [2203](https://arxiv.org/abs/2203.11239)
+1. **Architecture:** Encder+Decoder
+2. **Pretraining Objective:** Denoising Autoencoder
+3. **Number of Parameters:** ~103M
+4. **Dataset:** 1M tokens; CNN/DM, XSUM, ELI5, and  WMT16 En-Ro.
+5. **Contribution:** Decrease the model size with the increase in performance by adding  quantization and distillation to the BART.
 
 ## Multilingual Language Modelling
 ### XLM-RoBERTa
@@ -202,6 +179,40 @@
 ### Pegasus
 1912
 
+## Text to Image
+### DALL-E
+2101
+### GLIDE
+2112
+### Stable Diffusion
+2112
+### Flamingo
+2204
+### DALL-E 2
+2204
+
+## Image Classification
+### ViT
+2010
+### Swin Transformer
+2103
+### Global Context ViT
+2206
+
+## Image-Text Pair
+### CLIP
+2102
+### ALBEF
+2107
+### FLAVA
+2112
+### BLIP
+2201
+### Imagen
+2206
+### BLIP-2
+2301
+
 ## Reinforcement Learning
 ### Decision Transformers
 2106
@@ -215,4 +226,3 @@
 2107
 ### Minerva
 2206
-
